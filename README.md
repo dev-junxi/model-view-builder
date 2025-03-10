@@ -1,6 +1,4 @@
-# ModelViewBuilder参考文档
-
-# ModelViewBuilde参考文档-
+# ModelView参考文档
 
 ## 1 概述
 
@@ -16,7 +14,7 @@
     <artifactId>model-view-builder</artifactId>
 </dependency>
 ```
-> 最新版本，可查询 [msl-parent](https://t.clxkj.cn/msl-java/msl-parent/blob/master/pom.xml) 项目pom.xml，或者[公司私服](http://139.129.222.24:8081/#browse/browse/components\:maven-releases)
+
 
 ### 2.2 通过 ModelBuilder 指定构建依赖
 
@@ -267,49 +265,12 @@ private static void add(DefaultViewMapperImpl viewMapper, Class<?> type) {
 
 ## 4 更新日志
 
-*   [x] 2.0.0 初始版本，实现基本框架
-    
-*   [x] 2.1.0 @OneMatch支持匹配多个类
-    
-
-## 5 扩展组件 dao-spring-boot-starter
-
-此组件是在 model-view-builder 组件的基础上，结合 mybaits-plus 封装好常用查询功能，接入后只需继承定义好的基类，就能获取关联查询的能力。
-
-### 5.1引包
-
-```plaintext
-<dependency>
-    <groupId>com.msl</groupId>
-    <artifactId>dao-spring-boot-starter</artifactId>
-</dependency>
-```
-
-### 5.2定义相关类
-
-1.  **实体继承 HasKey** ：Book implements HasKey<Integer>，实现 gainKey方法获取对象惟一标识，通过注解 @KeyColumn 指定对应的数据库字段```/\*\*
-    
-2.  获取惟一标识\*
-    
-3.  @return id\*/@Override@KeyColumn("id")public Integer gainKey() {return id;}```
-    
-4.  **定义 mapper** 继承 mybatis-plus 提供的 BaseMapper ： interface BookMapper extends BaseMapper<Book>
-    
-5.  **定义 dao** 继承 BaseDao ： interface BookDao extends BaseDao<BookMapper, Book, Integer>
-    
-6.  **定义 daoImpl** 继承 BaseDaoImpl : class BookDaoImpl extends BaseDaoImpl<BookMapper, Book, Integer> implements BookDao
-    
-7.  **定义 view** 继承 View ： class BookView extends View<Book>
-    
-8.  **定义 service** 继承 BaseService ： interface BookService extends BaseService<BookView, Book, Integer>
-    
-9.  **定义 serviceImpl** 继承 BaseServiceImpl ： class BookServiceImpl extends BaseServiceImpl<BookDao, BookView, Book, Integer>implements BookService
-    
-
-## 6 更新日志
-
 *   [x] 1.0.0 初始版本
     
 *   [x] 1.0.2 HasId 更换为 HasKey ，支持任意类型的惟一标识
     
 *   [x] @OneMatch匹配多个类后的相应支持
+        
+*   [x] 2.0.0 初始版本，实现基本框架
+    
+*   [x] 2.1.0 @OneMatch支持匹配多个类
