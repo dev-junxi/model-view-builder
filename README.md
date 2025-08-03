@@ -263,14 +263,3 @@ private static void add(DefaultViewMapperImpl viewMapper, Class<?> type) {
 }
 ```
 
-## 4 更新日志
-
-*   [x] 1.0.0 初始版本
-    
-*   [x] 1.0.2 HasId 更换为 HasKey ，支持任意类型的惟一标识
-    
-*   [x] @OneMatch匹配多个类后的相应支持
-        
-*   [x] 2.0.0 初始版本，实现基本框架
-    
-*   [x] 2.1.0 @OneMatch支持匹配多个类
