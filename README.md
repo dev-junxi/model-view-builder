@@ -1,3 +1,4 @@
+
 # ModelView参考文档
 
 ## 1 概述
@@ -6,15 +7,7 @@
 
 ## 2 快速开始
 
-### 2.1 引包
-
-```plaintext
-<dependency>
-    <groupId>com.msl</groupId>
-    <artifactId>model-view-builder</artifactId>
-</dependency>
-```
-
+### 2.1 拉取项目
 
 ### 2.2 通过 ModelBuilder 指定构建依赖
 
