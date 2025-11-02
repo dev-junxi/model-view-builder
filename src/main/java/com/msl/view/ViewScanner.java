@@ -1,7 +1,6 @@
 package com.msl.view;
 
 import com.google.common.collect.Sets;
-import com.google.common.reflect.ClassPath;
 import com.msl.model.builder.ModelBuilder;
 import com.msl.model.builder.context.BuildContext;
 import com.msl.model.utils.ClassScanner;
@@ -11,11 +10,11 @@ import com.msl.view.mapper.impl.DefaultViewMapperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 /**
  * @author wanglq
@@ -59,7 +58,7 @@ public class ViewScanner {
         };
     }
 
-    private final ViewMapper scan(String[] pkg) {
+    protected final ViewMapper scan(String[] pkg) {
         DefaultViewMapperImpl viewMapper = new DefaultViewMapperImpl();
         try {
             Set<Class<?>> classes = Sets.newHashSet();
@@ -76,7 +75,7 @@ public class ViewScanner {
         return viewMapper;
     }
 
-    private void add(DefaultViewMapperImpl viewMapper, Class<?> type) {
+    protected void add(DefaultViewMapperImpl viewMapper, Class<?> type) {
         if (!View.class.isAssignableFrom(type)) {
             return;
         }

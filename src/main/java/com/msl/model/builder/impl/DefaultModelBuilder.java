@@ -1,6 +1,5 @@
 package com.msl.model.builder.impl;
 
-import com.google.common.collect.Sets;
 import com.msl.model.builder.AbstractModelBuilder;
 import com.msl.model.builder.ExtractorRegistry;
 import com.msl.model.builder.LazyBuilderRegistry;
@@ -9,6 +8,8 @@ import com.msl.model.builder.context.BuildingTemp;
 import com.msl.model.builder.context.LazyBuildContext;
 import com.msl.model.utils.StoreUtil;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -60,7 +61,7 @@ public class DefaultModelBuilder extends AbstractModelBuilder {
         if (buildContext instanceof LazyBuildContext) {
             ((LazyBuildContext) buildContext).setupLazyBuilderHolder(this);
         }
-        Set<?> toBuilding = Sets.newHashSet(sources);
+        Set<?> toBuilding = toBuilding(sources);
         int cur = deep;
         while (!toBuilding.isEmpty() && --cur >= 0) {
             BuildingTemp temp = new BuildingTemp();
@@ -84,5 +85,19 @@ public class DefaultModelBuilder extends AbstractModelBuilder {
                     .apply(buildContext, StoreUtil.filterIdSet(valueNamespace, ids, buildContext, temp.getValuesMap()));
             temp.mergeValues(valueNamespace, values);
         }));
+    }
+
+    private Set<?> toBuilding(Iterable<?> sources) {
+        HashSet<Object> set = new HashSet<>();
+        for (Object next : sources) {
+            if (next instanceof Collection) {
+                set.addAll(toBuilding((Collection<?>) next));
+            } else if (next instanceof Map) {
+                set.addAll(toBuilding(((Map<?, ?>) next).values()));
+            } else {
+                set.add(next);
+            }
+        }
+        return set;
     }
 }
