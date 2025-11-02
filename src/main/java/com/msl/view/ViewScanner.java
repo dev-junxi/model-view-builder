@@ -111,6 +111,19 @@ public class ViewScanner {
                     }
                 });
             }
+
+            if (params.length == 3 && params[1] == BuildContext.class && params[2] == ViewMapper.class) {
+                log.info(">>>>>>>>>>>>>>>>>>>> register view [{}] for model [{}], with buildContext and viewMapper.",
+                        type.getSimpleName(), params[0].getSimpleName());
+                viewMapper.addMapper(params[0], (context, model) -> {
+                    try {
+                        return constructor.newInstance(model, context, viewMapper);
+                    } catch (Exception e) {
+                        log.error("fail to construct model:{}", model, e);
+                        return null;
+                    }
+                });
+            }
         }
     }
 }
